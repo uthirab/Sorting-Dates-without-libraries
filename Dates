@@ -1,0 +1,45 @@
+import time
+start=time.time()
+dates=('21 Jan 2018','04 Feb 1932', '19 Jun 1954', '02 Jan 2018','04 Oct 1954', '20 Aug 2015')
+month={'Jan':1,'Feb':2,'Mar':3,'Apr':4,'May':5,'Jun':6,'Jul':7,'Aug':8,'Sep':9,'Oct':10,'Nov':11,'Dec':12}
+remont={1:'Jan',2:'Feb',3:'Mar',4:'Apr',5:'May',6:'Jun',7:'Jul',8:'Aug',9:'Sep',10:'Oct',11:'Nov',12:'Dec'}
+dd=[]
+mm=[]
+yy=[]
+s=[]
+
+for i in range(len(dates)):
+    spl=dates[i].split(' ')
+    dd.append(int(spl[0]))
+    mm.append(int(month[spl[1]]))
+    yy.append(int(spl[2]))
+    spl=(dd[-1],mm[-1],yy[-1])
+    s.append(spl)
+# print(s)
+for i in range(len(s)-1):
+    for j in range(len(dates)-1):
+        if s[i][2]>s[i+1][2]:
+            temp=s[i+1]
+            s[i+1]=s[i]
+            s[i]=temp
+for i in range(len(s)-1):
+    if s[i][2]==s[i+1][2]:
+        for j in range(len(dates)-1):
+            if s[i][1]>s[i+1][1]:
+                temp=s[i+1]
+                s[i+1]=s[i]
+                s[i]=temp
+for i in range(len(s)-1):
+    if s[i][1]==s[i+1][1]:
+        for j in range(len(dates)-1):
+            if s[i][0]>s[i+1][0]:
+                temp=s[i+1]
+                s[i+1]=s[i]
+                s[i]=temp
+for i in range(len(s)):
+    d=s[i][0]
+    m=remont[s[i][1]]
+    y= s[i][2]
+    print(d,m,y)
+end=time.time()
+print(end-start)
